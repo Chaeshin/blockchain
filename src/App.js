@@ -21,8 +21,8 @@ const styles = {
     left: '24px',
     width: '24px',
     height: '24px',
-    marginLeft: '30px', 
-    marginRight: '10px'
+    marginLeft: '40px', 
+    marginRight: '20px'
   },
   Text: {
     color: '#030303',
@@ -55,6 +55,7 @@ const styles = {
     width: '300px',
     height: 'auto',
     paddingBottom: '20px',
+    marginBottom: '20px',
     backgroundColor: '#ffffff',
     borderRadius: '2px',
     boxShadow: '2px 0px 10px rgba(3,3,3,0.1)',
@@ -76,6 +77,13 @@ const styles = {
     fontWeight: 400,
     lineHeight: '19px',
   },
+  LIcon: {
+    color: '#030303',
+    fill: '#030303',
+    fontSize: '40px',
+    width: '40px',
+    height: '40px',
+  },
 };
 
 const IconComponent = () => (
@@ -84,8 +92,17 @@ const IconComponent = () => (
     </path>
   </svg>
 );
+const LIconComponent = () => (
+  <svg style={styles.Icon}  viewBox="0 0 24 24">
+    <path fill="none" d="M0 0h24v24H0z">
+    </path>
+    <path d="M18.39 14.56C16.71 13.7 14.53 13 12 13s-4.71.7-6.39 1.56A2.97 2.97 0 0 0 4 17.22V20h16v-2.78c0-1.12-.61-2.15-1.61-2.66zM9.78 12h4.44c1.21 0 2.14-1.06 1.98-2.26l-.32-2.45C15.57 5.39 13.92 4 12 4S8.43 5.39 8.12 7.29L7.8 9.74c-.16 1.2.77 2.26 1.98 2.26z">
+    </path>
+  </svg>
+);
 const defaultProps = {
-  IconComponent
+  IconComponent,
+  LIconComponent,
 };
 const App = (props) => {
   const [topics, setTopics] = useState([
@@ -96,6 +113,11 @@ const App = (props) => {
     { title: 'Axios', content: 'How to use axios?', comments: 200 },
     { title: 'Router', content: 'Best ways to route.', comments: 143 },
   ]);
+
+  const [footer, setfooter] = useState(['Home', 'About Us', 'Contact', 'Term & Condition']);
+  const [nav, setnav] = useState(['Home', 'Top Votes', 'Top Comments']);
+  const [topvote, setTopVote] = useState(['React', 'HTML', 'CSS']);
+
   return (
     <div style={styles.Screen}>
       <div style={styles.Header}>
@@ -104,6 +126,18 @@ const App = (props) => {
             : <defaultProps.IconComponent />}
         <div style={styles.Text}>
             blockNote
+        </div>
+        <div style={{width: '80%', display: 'flex', justifyContent: 'flex-end'}}>
+          <div style={{width: '30%', display: 'flex', justifyContent: 'space-evenly'}}>
+            {nav.map((topic, index) => (
+              <div key={index} style={styles.FText}>{topic}</div>
+            ))}
+          </div>
+        </div>
+        <div>
+          {props.LIconComponent 
+          ? <props.LIconComponent style={styles.LIcon} /> 
+          : <defaultProps.LIconComponent />}
         </div>
       </div>
       
@@ -137,15 +171,20 @@ const App = (props) => {
             ))}
         </div>
         <div style={styles.PCard}>
+        <div style={{marginTop:'5px', marginLeft:'40px'}}><h3 >Top Vote Topics</h3></div>
+            {topvote.map((topic, index) => (
+              <div key={index} style={{marginBottom:'3px', marginLeft:'50px', }}> 
+                <h5 style={{marginBottom:'3px', marginTop:'3px', }}>{topic}</h5>
+              </div>
+            ))}
         </div>
       </div>
     </div>
     <div style={styles.Footer} >
-      <div style={{width: '30%', display: 'flex', justifyContent:'space-around', flexWrap: 'wrap', marginLeft: '30px'}}>
-        <div style={styles.FText}>Home</div>
-        <div style={styles.FText}>About Us</div>
-        <div style={styles.FText}>Contact</div>
-        <div style={styles.FText}>Term & Condition</div>
+      <div style={{width: '25%', display: 'flex', justifyContent:'space-around', flexWrap: 'wrap', marginLeft: '30px'}}>
+        {footer.map((topic, index) => (
+          <div key={index} style={styles.FText}>{topic}</div>
+        ))}
       </div>
     </div>
   </div>
