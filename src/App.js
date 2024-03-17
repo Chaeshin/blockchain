@@ -1,7 +1,6 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import MostCommentedTopics from "./MostCommentedTopics";
 import AddTopicTags from "./AddTopicTags";
-
 
 const App = () => {
   return(
